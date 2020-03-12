@@ -64,11 +64,11 @@ public class ProdutoService {
         return dto;
     }
 
-    public List<ProdutoDTO> buscarPorDescricao(String descricao) {
+    public List<ProdutoDTO> buscarPorDescricaoContendo(String descricao) {
 
         // TODO: validacao parametros input - descricao
 
-        List<Produto> produtos = this.repository.findByDescricao(descricao);
+        List<Produto> produtos = this.repository.findByDescricaoLike("%"+descricao+"%");
 
         List<ProdutoDTO> dtos = new ArrayList<>();
 

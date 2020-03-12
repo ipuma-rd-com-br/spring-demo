@@ -60,15 +60,15 @@ public class ProdutoController {
     public ResponseEntity buscarPorDescricao(@PathParam("descricao") String descricao) {
         ResponseEntity response = null;
         try {
-            List<ProdutoDTO> dtos = this.service.buscarPorDescricao(descricao);
+            List<ProdutoDTO> dtos = this.service.buscarPorDescricaoContendo(descricao);
             if (dtos.size() > 0) {
 //                response = ResponseEntity.ok().body(dtos);
                 response = ResponseEntity.ok().body(ResponseDTO.sucesso(dtos));
             } else {
-                response = ResponseEntity.badRequest().body(new Exception("Nenhum Produto com a descrição informada."));
+                response = ResponseEntity.badRequest().body(ResponseDTO.erro("Nenhum Produto com a descrição informada."));
             }
         } catch (Exception e) {
-            response = ResponseEntity.badRequest().body(new Exception(e.getClass().getName()+": "+e.getMessage()));
+            response = ResponseEntity.badRequest().body(ResponseDTO.erro(e.getMessage(), e));
         }
         return response;
     }
